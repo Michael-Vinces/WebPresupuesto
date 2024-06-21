@@ -1,0 +1,23 @@
+FROM node
+COPY ./dist /var/www
+WORKDIR /var/www
+COPY package*.json ./
+RUN npm install
+
+RUN npm run build
+EXPOSE 2500
+ENTRYPOINT [ "npm", "start" ]
+
+#FROM node
+#COPY ./dist /var/www
+#WORKDIR /var/www
+#RUN npm install
+#EXPOSE 2500
+#ENTRYPOINT [ "npm","start" ]
+
+#FROM node
+#COPY . /var/www
+#WORKDIR /var/www
+#RUN npm install
+#EXPOSE 2500
+#ENTRYPOINT [ "npm", "start" ]
