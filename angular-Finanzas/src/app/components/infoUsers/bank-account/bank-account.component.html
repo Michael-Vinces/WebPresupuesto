@@ -1,0 +1,78 @@
+<div class="p-10 ">
+    <div class="flex justify-between items-center">
+      <div>
+        <p class="text-3xl text-slate-200">CONTENIDO DE LAS CUENTAS BANCARIAS</p>
+      </div>
+      <div class="flex ">
+        <h3> Total de Cuentas Bancarias: {{ cantidadCuentas }}</h3>
+        <input  [(ngModel)]="DB_CONTROL" (keyup)="GET_UNIT()" type="text" placeholder="Busqueda por ID" class="mx-5 input input-bordered bg-zinc-600"  />
+        <button class="btn flex-row bg-zinc-700" onclick="my_modal_1.showModal()">
+          <p>Agregar</p>
+        </button>
+      </div>
+    </div>
+    <div class="mt-4 ">
+      <hr>
+    </div>
+    <div class="overflow-x-auto mt-4 bg-slate-800 rounded-xl">
+      <table class="table text-xl">
+        <thead>
+          <tr class="text-xl">
+            <th></th>
+            <th>ID</th>
+            <th>Estado</th>
+            <th>Banco</th>
+            <th>Número de cuenta</th>
+            <th>Tipo de cuenta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let dato of datos; let i = index">
+            <th>{{ i + 1 }}</th>
+            <td>{{dato.id}}</td>
+            <td>{{dato.estado}}</td>
+            <td>{{dato.banco}}</td>
+            <td>{{dato.numero_cuenta}}</td>
+            <td>{{dato.tipo_cuenta}}</td>
+            <td class="text-center">
+              <button class="btn m-4 bg-teal-700 hover:bg-teal-600" (click)="GET_ACTUALIZED(dato)" onclick="my_modal_2.showModal()">Modificar</button>
+              <button class="btn m-4  bg-purple-900 hover:bg-purple-800" (click)="DELETED(dato.id)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <dialog id="my_modal_1" class="modal">
+      <form method="dialog" class="modal-box" (ngSubmit)="POST()">
+        <!-- Campos del formulario -->
+        <h3 class="font-bold text-lg"> >>AGREGAR CUENTA BANCARIA<< </h3>
+        <input [(ngModel)]="newRegistro.banco" [ngModelOptions]="{ standalone: true }" class="m-2 p-2" type="text" placeholder="Banco">
+        <input [(ngModel)]="newRegistro.numero_cuenta" [ngModelOptions]="{ standalone: true }" class="m-2 p-2" type="text" placeholder="Número de cuenta">
+        <input [(ngModel)]="newRegistro.tipo_cuenta" [ngModelOptions]="{ standalone: true }" class="m-2 p-2" type="text" placeholder=" Tipo de cuenta">
+        <button class="btn" type="submit">Enviar</button>
+        <p class="py-4">Press Scape ESC</p>
+      </form>
+      <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+      </form>
+    </dialog>
+
+    <dialog id="my_modal_2" class="modal">
+      <form method="dialog" class="modal-box" (ngSubmit)="PUT(editRegister)" >
+        <!-- Campos del formulario -->
+        <h3 class="font-bold text-lg"> -- MODIFICAR CUENTA BANCARIA -- </h3>
+        <input [(ngModel)]="editRegister.banco" [ngModelOptions]="{ standalone: true }" class="m-2 p-2" type="text" placeholder="Banco">
+        <input [(ngModel)]="editRegister.numero_cuenta" [ngModelOptions]="{ standalone: true }" class="m-2 p-2" type="text" placeholder="Número">
+        <input [(ngModel)]="editRegister.tipo_cuenta" [ngModelOptions]="{ standalone: true }" class="m-2 p-2" type="text" placeholder="Tipo de cuenta">
+        <button class="btn" type="submit">Enviar</button>
+        <p class="py-4">Press Scape ESC</p>
+      </form>
+      <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+      </form>
+    </dialog>
+  </div>
+  
+  
+

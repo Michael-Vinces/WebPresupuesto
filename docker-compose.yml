@@ -1,0 +1,18 @@
+version: '3'
+services:
+  api:
+    build: ./api-rest-finanzas
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=finanzas
+  front:
+    build: ./angular-finanzas
+    ports:
+      - '4200:4200'
